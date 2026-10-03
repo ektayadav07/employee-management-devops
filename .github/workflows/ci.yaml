@@ -37,3 +37,11 @@ jobs:
       - name: Push Docker image to ECR
         run: |
           docker push 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest
+                - name: Test SSM connection
+      - name: Test SSM connection
+        run: |
+          aws ssm send-command \
+            --instance-ids i-029984bb2dd449978 \
+            --document-name AWS-RunShellScript \
+            --parameters '{"commands":["echo GitHub Actions connected to EC2 through SSM"]}' \
+            --region ap-south-1
