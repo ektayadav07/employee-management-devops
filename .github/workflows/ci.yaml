@@ -1,3 +1,4 @@
+
 name: CI/CD
 
 on:
@@ -27,17 +28,14 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: |
-          docker build -t employee-management-app .
+        run: docker build -t employee-management-app .
 
       - name: Tag Docker image
-        run: |
-          docker tag employee-management-app:latest 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest
+        run: docker tag employee-management-app:latest 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest
 
       - name: Push Docker image to ECR
-        run: |
-          docker push 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest
-                - name: Test SSM connection
+        run: docker push 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest
+
       - name: Test SSM connection
         run: |
           aws ssm send-command \
@@ -45,3 +43,4 @@ jobs:
             --document-name AWS-RunShellScript \
             --parameters '{"commands":["echo GitHub Actions connected to EC2 through SSM"]}' \
             --region ap-south-1
+
