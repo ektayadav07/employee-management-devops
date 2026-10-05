@@ -39,8 +39,8 @@ jobs:
       - name: Test SSM connection
         run: |
           aws ssm send-command \
-            --instance-ids i-029984bb2dd449978 \
+            --instance-ids i-029984bb2dd4499 \
             --document-name AWS-RunShellScript \
-            --parameters '{"commands":["echo GitHub Actions connected to EC2 through SSM"]}' \
-            --region ap-south-1
+            --parameters '{"commands":["aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 064123637958.dkr.ecr.ap-south-1.amazonaws.com"]}' \
+            -- region ap-south-1
 
