@@ -41,6 +41,6 @@ jobs:
           aws ssm send-command \
             --instance-ids i-029984bb2dd449978 \
             --document-name AWS-RunShellScript \
-            --parameters '{"commands":["aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 064123637958.dkr.ecr.ap-south-1.amazonaws.com","sudo docker pull 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest","sudo docker stop employee-app"]}' \
+            --parameters '{"commands":["aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 064123637958.dkr.ecr.ap-south-1.amazonaws.com","sudo docker pull 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest","sudo docker stop employee-app","sudo docker rm employee-app","sudo docker run -d -p 5000:5000 --name employee-app 064123637958.dkr.ecr.ap-south-1.amazonaws.com/employee-management-app:latest"]}' \
             --region ap-south-1
 
